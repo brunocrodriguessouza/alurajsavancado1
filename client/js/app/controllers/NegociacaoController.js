@@ -15,7 +15,6 @@ class NegociacaoController {
 
         this._listaNegociacoes.adicionar(this._criarNegociacao());
         this._limparFormulario();
-        console.log(this._listaNegociacoes.negociacoes);
     }
 
     _criarNegociacao() {
