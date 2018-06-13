@@ -33,6 +33,32 @@ class NegociacaoController {
     obterNegociacoesDaSemana() {
 
         let service = new NegociacaoService();
+
+        service.obterNegociacoesDaSemana();
+        promise
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao))
+                this._mensagem.texto = 'Negociacao da semana obtida com sucesso';
+            })
+            .catch(erro => this._mensagem.texto = erro);
+
+        service.obterNegociacoesDaSemanaAnterior();
+        promise
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao))
+                this._mensagem.texto = 'Negociacao da semana obtida com sucesso';
+            })
+            .catch(erro => this._mensagem.texto = erro);
+        
+        service.obterNegociacoesDaSemanRetrasada();
+        promise
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao))
+                this._mensagem.texto = 'Negociacao da semana obtida com sucesso';
+            })
+            .catch(erro => this._mensagem.texto = erro);
+
+        /*
         service.obterNegociacoesDaSemana((erro, negociacoes) => {
             if(erro) {
                 this._mensagem.texto = erro;
@@ -40,7 +66,6 @@ class NegociacaoController {
             }
 
             negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao));
-            //this._mensagem.texto = 'Negociacoes importadas com sucesso';
             service.obterNegociacoesDaSemanaAnterior((erro, negociacoes) => {
                 if(erro) {
                     this._mensagem.texto = erro;
@@ -48,7 +73,6 @@ class NegociacaoController {
                 }
     
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao));
-                //this._mensagem.texto = 'Negociacoes importadas com sucesso';
 
                 service.obterNegociacoesDaSemanaRetrasada((erro, negociacoes) => {
                     if(erro) {
@@ -60,7 +84,7 @@ class NegociacaoController {
                     this._mensagem.texto = 'Negociacoes importadas com sucesso';
                 });
             });
-        }); 
+        }); */
     }
 
     removerTodas() {
