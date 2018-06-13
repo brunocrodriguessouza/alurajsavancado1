@@ -34,15 +34,15 @@ class NegociacaoController {
 
         let service = new NegociacaoService();
 
-        service.obterNegociacoesDaSemana();
-        promise
+        let promise = service.obterNegociacoesDaSemana();
+         promise
             .then(negociacoes => {
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao))
                 this._mensagem.texto = 'Negociacao da semana obtida com sucesso';
             })
             .catch(erro => this._mensagem.texto = erro);
 
-        service.obterNegociacoesDaSemanaAnterior();
+        promise = service.obterNegociacoesDaSemanaAnterior();
         promise
             .then(negociacoes => {
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao))
@@ -50,7 +50,7 @@ class NegociacaoController {
             })
             .catch(erro => this._mensagem.texto = erro);
         
-        service.obterNegociacoesDaSemanRetrasada();
+        promise = service.obterNegociacoesDaSemanRetrasada();
         promise
             .then(negociacoes => {
                 negociacoes.forEach(negociacao => this._listaNegociacoes.adicionar(negociacao))
