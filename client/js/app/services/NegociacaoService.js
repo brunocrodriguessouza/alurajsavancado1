@@ -33,4 +33,56 @@ class NegociacaoService {
 
         xhr.send();
     }
+
+    obterNegociacoesDaSemanaAnterior(cb) {
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'negociacoes/anterior');
+
+        xhr.onreadystatechange = () => {
+
+            if(xhr.readyState == 4) {
+                
+                if(xhr.status == 200) {
+
+                    console.log('Obtendo as negociacoes do servidor');
+                    cb(null, JSON.parse(xhr.responseText)
+                        .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+                } else {
+                    
+                    console.log(xhr.responseText);
+                    cb('Nao foi possivel obter as negociacoes do servidor', null);
+                }
+            }
+        };
+
+        xhr.send();
+    }
+
+    obterNegociacoesDaSemanaRetrasada(cb) {
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'negociacoes/retrasada');
+
+        xhr.onreadystatechange = () => {
+
+            if(xhr.readyState == 4) {
+                
+                if(xhr.status == 200) {
+
+                    console.log('Obtendo as negociacoes do servidor');
+                    cb(null, JSON.parse(xhr.responseText)
+                        .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)));
+                } else {
+                    
+                    console.log(xhr.responseText);
+                    cb('Nao foi possivel obter as negociacoes do servidor', null);
+                }
+            }
+        };
+
+        xhr.send();
+    }
 }
